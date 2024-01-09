@@ -1,3 +1,48 @@
+Setp 1 : Download the assets from xylophone using below link 
+
+https://github.com/londonappbrewery/xylophone-flutter
+
+
+Step 2 : Go to pubspec.yaml
+
+Put this below the cupertino_icons: ^1.0.2
+  
+assets_audio_player: ^3.1.1
+
+Sep 3 : Go to pubspec.yaml
+
+
+Put this below the uses-material-design: true
+
+assets:
+  - assets/
+
+Step 4 : Click on pub get in pubspec.yaml
+
+Step 5 : Click on get dependencies in main.Dart
+
+
+Optional 
+
+Step 6 : goto android, click on app,click on build.gradles
+
+Type multiDexEnabled true inside defaultConfig {
+
+
+
+
+
+
+Code :
+
+
+
+
+
+
+
+
+
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 
@@ -77,3 +122,4 @@ class _XyloPageState extends State<XyloPage> {
     );
   }
 }
+
