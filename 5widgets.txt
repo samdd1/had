@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:app="http://schemas.android.com/apk/res-auto"
+     xmlns:tools="http://schemas.android.com/tools"
+     android:layout_width="match_parent"
+   android:layout_height="match_parent"
+     tools:context=".MainActivity">
+
+    <LinearLayout
+     android:layout_width="150dp"
+     android:layout_height="match_parent"
+     android:background="#AADD"
+     android:gravity="center">
+
+    <TextView
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:padding="10dp"
+    android:layout_margin="10dp"
+    android:text="CHECKOUT"
+    android:textAlignment="center"
+    android:textStyle="bold" />
+
+    </LinearLayout>
+
+     <LinearLayout
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+     android:gravity="center"
+     android:orientation="vertical">
+
+    <ImageView
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:src="@drawable/login" />
+         <EditText
+    android:layout_width="match_parent"
+     android:layout_height="48dp"
+    android:layout_margin="20dp"
+    android:hint="Username"
+    android:id="@+id/user" />
+         <EditText
+     android:layout_width="match_parent"
+     android:layout_height="48dp"
+    android:layout_margin="20dp"
+     android:hint="Password"
+    android:id="@+id/pass" />
+
+     <CheckBox
+     android:id="@+id/itemCheckBox1"
+     android:layout_width="wrap_content"
+     android:layout_height="48dp"
+     android:layout_marginTop="10dp"
+     android:text="Apple" />
+
+     <CheckBox
+     android:id="@+id/itemCheckBox2"
+     android:layout_width="wrap_content"
+     android:layout_height="48dp"
+     android:layout_marginTop="10dp"
+     android:text="Orange" />
+
+     <CheckBox
+     android:id="@+id/itemCheckBox3"
+     android:layout_width="wrap_content"
+     android:layout_height="48dp"
+     android:layout_marginTop="10dp"
+     android:text="Grapes" />
+
+     <Button
+     android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+     android:layout_margin="40dp"
+   android:text="Submit"
+     android:id="@+id/button" />
+
+     </LinearLayout>
+
+     </LinearLayout>
+
+
+
+
+package com.example.first;
+
+import androidx.appcompat.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.Toast;
+import android.os.Bundle;
+
+public class MainActivity extends AppCompatActivity {
+
+    private EditText usernameEditText;
+    private EditText passwordEditText;
+    private CheckBox appleCheckBox;
+    private CheckBox orangeCheckBox;
+    private CheckBox grapesCheckBox;
+    private Button submitButton;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        usernameEditText = findViewById(R.id.user);
+        passwordEditText = findViewById(R.id.pass);
+        appleCheckBox = findViewById(R.id.itemCheckBox1);
+        orangeCheckBox = findViewById(R.id.itemCheckBox2);
+        grapesCheckBox = findViewById(R.id.itemCheckBox3);
+        submitButton = findViewById(R.id.button);
+
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String username = usernameEditText.getText().toString();
+                String password = passwordEditText.getText().toString();
+                String selectedFruit = getSelectedFruit();
+                String message = "Username: " + username + "\nPassword: " + password + "\nSelected Fruit: " + selectedFruit;
+                Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        setCheckboxListeners();
+    }
+
+    private void setCheckboxListeners() {
+        appleCheckBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                uncheckOtherCheckboxes(appleCheckBox);
+            }
+        });
+
+        orangeCheckBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                uncheckOtherCheckboxes(orangeCheckBox);
+            }
+        });
+
+        grapesCheckBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                uncheckOtherCheckboxes(grapesCheckBox);
+            }
+        });
+    }
+
+    private void uncheckOtherCheckboxes(CheckBox checkedBox) {
+        if (checkedBox == appleCheckBox) {
+            orangeCheckBox.setChecked(false);
+            grapesCheckBox.setChecked(false);
+        } else if (checkedBox == orangeCheckBox) {
+            appleCheckBox.setChecked(false);
+            grapesCheckBox.setChecked(false);
+        } else if (checkedBox == grapesCheckBox) {
+            appleCheckBox.setChecked(false);
+            orangeCheckBox.setChecked(false);
+        }
+    }
+
+    private String getSelectedFruit() {
+        if (appleCheckBox.isChecked()) {
+            return "Apple";
+        } else if (orangeCheckBox.isChecked()) {
+            return "Orange";
+        } else if (grapesCheckBox.isChecked()) {
+            return "Grapes";
+        } else {
+            return "None";
+        }
+    }
+}
