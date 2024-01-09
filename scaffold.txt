@@ -1,0 +1,20 @@
+Scaffold
+
+void main() {
+  runApp(MaterialApp(
+    home: Scaffold(
+      appBar: AppBar(
+        title: Text("Android",
+        ),
+      ),
+      body: Center(
+        child: Text("This is a sample Test",
+        style: TextStyle(
+          fontSize: 40,
+        ),
+        ),
+      ),
+    ),
+  ),
+  );
+}
